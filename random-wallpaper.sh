@@ -1,5 +1,13 @@
 #!/bin/bash
+script_dir=~/personal_dev/wallpaper-scripts
 randomWallpaper=$(ls ~/Wallpapers/active_wallpapers/*.png ~/Wallpapers/active_wallpapers/*.jpg | sort -R | tail -1)
+
+while [ "$randomWallpaper" = $(cat $script_dir/lastwallpaper) ]
+do
+    randomWallpaper=$(ls ~/Wallpapers/active_wallpapers/*.png ~/Wallpapers/active_wallpapers/*.jpg | sort -R | tail -1)
+done
+
+echo -n "$randomWallpaper" > $script_dir/lastwallpaper
 
 if [ "$1" = "startup" ]
 then
